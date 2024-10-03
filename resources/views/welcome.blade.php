@@ -11,7 +11,7 @@
 <body>
     <div class="flex flex-col items-center justify-center">
         <h1 class="text-3xl font-bold">Contact Us</h1>
-        <form action="{{ url('/contact-us') }}" method="post" class="space-y-4 border border-black w-1/3 p-4 mt-4">
+        <form action="{{ url('/contact') }}" method="post" class="space-y-4 border border-black w-1/3 p-4 mt-4">
             @csrf
 
             <div class="flex flex-col gap-2">
