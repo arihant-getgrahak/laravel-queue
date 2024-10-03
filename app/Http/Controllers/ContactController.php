@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactRequest;
 use DB;
 use App\Models\ContactUs;
+use App\Jobs\SendEmailJob;
 
 class ContactController extends Controller
 {
@@ -22,8 +23,13 @@ class ContactController extends Controller
                 "phone" => (int) $request->phone
             ];
             DB::beginTransaction();
+
             $isCreate = ContactUs::create($sendData);
+
             DB::commit();
+
+            dispatch(new SendEmailJob($request->all()));
+            
             if ($isCreate) {
                 return redirect()->back()->with("success", "Your message has been sent successfully.");
             }
