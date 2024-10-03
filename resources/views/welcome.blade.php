@@ -34,7 +34,7 @@
 
             <div class="flex flex-col gap-2">
                 <label for="phone">Phone Number</label>
-                <input type="tel" name="phone" id="phone" class="border border-black p-1 rounded-md"
+                <input type="number" name="phone" id="phone" class="border border-black p-1 rounded-md"
                     placeholder="Your phone" value="{{ old('phone') }}">
                 @error('phone')
                     <p class="text-red-500">{{ $message }}</p>
