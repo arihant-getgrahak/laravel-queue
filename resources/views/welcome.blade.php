@@ -17,7 +17,7 @@
             <div class="flex flex-col gap-2">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" class="border border-black p-1 rounded-md"
-                    placeholder="Your name">
+                    placeholder="Your name" value="{{ old('name') }}>
                 @error('name')
                     <p class="text-red-500">{{ $message }}</p>
                 @enderror
@@ -35,7 +35,7 @@
             <div class="flex flex-col gap-2">
                 <label for="phone">Phone Number</label>
                 <input type="tel" name="phone" id="phone" class="border border-black p-1 rounded-md"
-                    placeholder="Your phone">
+                    placeholder="Your phone" value="{{ old('phone') }}>
                 @error('phone')
                     <p class="text-red-500">{{ $message }}</p>
                 @enderror
