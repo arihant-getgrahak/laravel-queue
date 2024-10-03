@@ -29,8 +29,7 @@ class ContactController extends Controller
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            // return redirect()->back()->with("error", $e->getMessage());
-            echo $e->getMessage();
+            return redirect()->back()->with("error", $e->getMessage());
         }
     }
 }
