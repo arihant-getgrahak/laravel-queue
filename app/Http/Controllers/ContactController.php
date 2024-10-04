@@ -6,6 +6,7 @@ use App\Http\Requests\ContactRequest;
 use DB;
 use App\Models\ContactUs;
 use App\Jobs\SendEmailJob;
+use Storage;
 
 class ContactController extends Controller
 {
@@ -37,5 +38,15 @@ class ContactController extends Controller
             DB::rollBack();
             return redirect()->back()->with("error", $e->getMessage());
         }
+    }
+
+    protected function uploadImage($file)
+    {
+        $uploadFolder = 'contact-us';
+        $image = $file;
+        $image_uploaded_path = $image->store($uploadFolder, 'public');
+        $uploadedImageUrl = Storage::disk('public')->url($image_uploaded_path);
+
+        return $uploadedImageUrl;
     }
 }
