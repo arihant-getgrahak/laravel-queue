@@ -25,6 +25,7 @@ class ContactRequest extends FormRequest
             "name" => "required",
             "email" => "required|email",
             "phone" => "required|string|size:10",
+            "image"=>"image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable"
         ];
     }
 
@@ -36,6 +37,10 @@ class ContactRequest extends FormRequest
             "email.email" => "Email is invalid",
             "phone.required" => "Phone is required",
             "phone.numeric" => "Phone is invalid",
+            "phone.size" => "Phone is invalid",
+            "image.image" => "Image is invalid",
+            "image.max" => "Image size is too large",
+            "image.mimes" => "Image type is invalid",
         ];
     }
 }
