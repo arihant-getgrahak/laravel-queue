@@ -17,14 +17,9 @@ class FileManagerController extends Controller
     {
         try {
             $sendData = [
-                "name" => $request->name,
-                "email" => $request->email,
-                "phone" => (int) $request->phone,
                 "image" => $request->file('image') ? $this->uploadImage($request->file('image')) : null,
             ];
             DB::beginTransaction();
-
-            // dd($sendData);
 
             $isCreate = FileManager::create($sendData);
 
