@@ -26,10 +26,13 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                <img class="w-full h-48 object-cover" src="path/to/your/image.jpg" alt="File Name">
+                @foreach ($files as $file)
+                @endforeach
+                <img class="w-full h-48 object-cover" src={{$file->image}} alt="user file">
                 <div class="p-4">
                     <h2 class="text-lg font-semibold text-gray-800">File Name</h2>
-                    <p class="text-sm text-gray-500">Uploaded on: <span class="text-gray-600">2024-10-04</span></p>
+                    <p class="text-sm text-gray-500">Uploaded on: <span
+                            class="text-gray-600">{{$file->created_at}}</span></p>
                 </div>
             </div>
         </div>
