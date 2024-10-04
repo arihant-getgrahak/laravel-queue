@@ -2,45 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactRequest;
+use Illuminate\Http\Request;
 use DB;
-use App\Models\ContactUs;
-use App\Jobs\SendEmailJob;
+use App\Models\FileManager;
 use Storage;
 
-class ContactController extends Controller
+class FileManagerController extends Controller
 {
     public function index()
     {
-        return view("contact");
+        $files = FileManager::all();
+        if (count($files) == 0) {
+            return view('welcome')->with("files", []);
+        }
+        return view('welcome')->with("files", $files);
     }
-
-    public function store(ContactRequest $request)
+    public function store(Request $request)
     {
         try {
             $sendData = [
-                "name" => $request->name,
-                "email" => $request->email,
-                "phone" => (int) $request->phone,
+                "file_name" => $request->file('image') ? $request->file('image')->getClientOriginalName() : null,
                 "image" => $request->file('image') ? $this->uploadImage($request->file('image')) : null,
             ];
             DB::beginTransaction();
 
-            // dd($sendData);
-
-            $isCreate = ContactUs::create($sendData);
+            $isCreate = FileManager::create($sendData);
 
             DB::commit();
 
-            $jobData = [
-                "name" => $request->name,
-                "email" => $request->email,
-            ];
-
-            dispatch(new SendEmailJob($jobData));
-
             if ($isCreate) {
-                return redirect()->back()->with("success", "Your message has been sent successfully.");
+                return redirect()->back()->with("success", "Your image has been uploaded successfully.");
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -50,7 +41,7 @@ class ContactController extends Controller
 
     protected function uploadImage($file)
     {
-        $uploadFolder = 'contact-us';
+        $uploadFolder = 'gallery';
         $image = $file;
         $image_uploaded_path = $image->store($uploadFolder, 'public');
         $uploadedImageUrl = Storage::disk('public')->url($image_uploaded_path);

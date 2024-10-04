@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('contact_us', function (Blueprint $table) {
-            $table->string('image')->nullable();
+        Schema::create('file_managers', function (Blueprint $table) {
+            $table->uuid("id")->primary();
+            $table->string('image');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('contact_us', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('file_managers');
     }
 };
