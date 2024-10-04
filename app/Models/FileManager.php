@@ -10,5 +10,7 @@ class FileManager extends Model
 {
     use HasFactory,HasUuids;
 
-    protected $fillable = [];
+    protected $fillable = [
+        "image"
+    ];
 }
