@@ -26,7 +26,7 @@ class FileManagerController extends Controller
             DB::commit();
 
             if ($isCreate) {
-                return redirect()->back()->with("success", "Your message has been sent successfully.");
+                return redirect()->back()->with("success", "Your image has been uploaded successfully.");
             }
         } catch (\Exception $e) {
             DB::rollBack();
