@@ -34,11 +34,25 @@
             @else
                 @foreach ($files as $file)
                     <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                        <img class="w-full h-48 object-cover" src="{{ $file->image }}" alt="Uploaded file">
-                        <div class="p-4">
-                            <h2 class="text-lg font-semibold text-gray-800">{{ basename($file->file_name) }}</h2>
-                            <p class="text-sm text-gray-500">Uploaded on: <span class="text-gray-600">{{ $file->created_at }}</span></p>
-                        </div>
+                        @if (in_array(pathinfo($file->file_name, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
+                            <img class="w-full h-48 object-cover" src="{{ $file->image }}" alt="Uploaded file">
+                            <div class="p-4">
+                                <h2 class="text-lg font-semibold text-gray-800">{{ basename($file->file_name) }}</h2>
+                                <p class="text-sm text-gray-500">Uploaded on: <span class="text-gray-600">{{ $file->created_at }}</span></p>
+                            </div>
+                        @elseif (in_array(pathinfo($file->file_name, PATHINFO_EXTENSION), ['pdf']))
+                            <div class="flex flex-col items-center justify-center h-48 p-4">
+                                <embed src="{{ $file->image }}" type="application/pdf" class="w-full h-full border" />
+                                <h2 class="text-lg font-semibold text-gray-800 mt-2">{{ basename($file->file_name) }}</h2>
+                                <p class="text-sm text-gray-500">Uploaded on: <span class="text-gray-600">{{ $file->created_at }}</span></p>
+                            </div>
+                        @else
+                            <div class="p-4">
+                                <h2 class="text-lg font-semibold text-gray-800">{{ basename($file->file_name) }}</h2>
+                                <p class="text-sm text-gray-500">Uploaded on: <span class="text-gray-600">{{ $file->created_at }}</span></p>
+                                <p class="text-sm text-gray-500">Unsupported file type.</p>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             @endif
