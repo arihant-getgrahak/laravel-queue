@@ -26,11 +26,18 @@ class ContactController extends Controller
             ];
             DB::beginTransaction();
 
+            // dd($sendData);
+
             $isCreate = ContactUs::create($sendData);
 
             DB::commit();
 
-            dispatch(new SendEmailJob($request->all()));
+            $jobData = [
+                "name" => $request->name,
+                "email" => $request->email,
+            ];
+
+            dispatch(new SendEmailJob($jobData));
 
             if ($isCreate) {
                 return redirect()->back()->with("success", "Your message has been sent successfully.");
