@@ -4,63 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>User Uploaded Files</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <div class="flex flex-col items-center justify-center">
-        <h1 class="text-3xl font-bold">Contact Us</h1>
-        <form action="{{ url('/contact') }}" method="post" class="space-y-4 border border-black w-1/3 p-4 mt-4" enctype="multipart/form-data">
-            @csrf
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-6">Uploaded Files</h1>
 
-            <div class="flex flex-col gap-2">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" class="border border-black p-1 rounded-md"
-                    placeholder="Your name" required value="{{ old('name') }}">
-                @error('name')
-                    <p class="text-red-500">{{ $message }}</p>
-                @enderror
-            </div>
+        <div class="mb-6">
+            <form action="{{ url('/store') }}" method="post" enctype="multipart/form-data">
+                <label for="file-upload" class="block text-lg font-medium text-gray-700">Upload a file</label>
+                <div class="mt-2 flex items-center">
+                    <input id="file-upload" type="file"
+                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    <button class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Upload</button>
+                </div>
+            </form>
+        </div>
 
-            <div class="flex flex-col gap-2">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="border border-black p-1 rounded-md"
-                    placeholder="Your email" required value="{{ old('email') }}">
-                @error('email')
-                    <p class="text-red-500">{{ $message }}</p>
-                @enderror
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <img class="w-full h-48 object-cover" src="path/to/your/image.jpg" alt="File Name">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold text-gray-800">File Name</h2>
+                    <p class="text-sm text-gray-500">Uploaded on: <span class="text-gray-600">2024-10-04</span></p>
+                </div>
             </div>
-
-            <div class="flex flex-col gap-2">
-                <label for="phone">Phone Number</label>
-                <input type="number" name="phone" id="phone" class="border border-black p-1 rounded-md"
-                    placeholder="Your phone" required value="{{ old('phone') }}">
-                @error('phone')
-                    <p class="text-red-500">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <label for="image">Image</label>
-                <input type="file" name="image" id="image" class="border border-black p-1 rounded-md" accept="image/*">
-                @error('image')
-                    <p class="text-red-500">{{ $message }}</p>
-                @enderror
-            </div>
-            <button type="submit"
-                class="w-full border border-black p-1 rounded-md bg-blue-500 text-white">Submit</button>
-        </form>
+        </div>
     </div>
-
-    <script>
-        if ("{{ session('success') }}") {
-            alert("{{ session('success') }}");
-        }
-        if ("{{ session('error') }}") {
-            alert("{{ session('error') }}");
-        }
-    </script>
 </body>
 
 </html>
