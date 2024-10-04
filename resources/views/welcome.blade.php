@@ -12,7 +12,6 @@
     <div class="container mx-auto p-6">
         <h1 class="text-3xl font-semibold text-gray-800 mb-6">Uploaded Files</h1>
 
-        <!-- File Upload Form -->
         <div class="mb-6">
             <form action="{{ url('/store') }}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -25,7 +24,6 @@
             </form>
         </div>
 
-        <!-- Display Uploaded Files -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @if (count($files) == 0)
                 <div class="bg-white shadow-md rounded-lg p-4">
