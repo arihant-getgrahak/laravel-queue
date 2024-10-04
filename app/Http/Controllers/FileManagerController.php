@@ -12,12 +12,16 @@ class FileManagerController extends Controller
     public function index()
     {
         $files = FileManager::all();
+        if (count($files) == 0) {
+            return view('welcome')->with("files", null);
+        }
         return view('welcome')->with("files", $files);
     }
     public function store(Request $request)
     {
         try {
             $sendData = [
+                "file_name" => $request->file('image') ? $request->file('image')->getClientOriginalName() : null,
                 "image" => $request->file('image') ? $this->uploadImage($request->file('image')) : null,
             ];
             DB::beginTransaction();
