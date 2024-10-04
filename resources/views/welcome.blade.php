@@ -14,9 +14,10 @@
 
         <div class="mb-6">
             <form action="{{ url('/store') }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <label for="file-upload" class="block text-lg font-medium text-gray-700">Upload a file</label>
                 <div class="mt-2 flex items-center">
-                    <input id="file-upload" type="file"
+                    <input id="file-upload" name="image" type="file"
                         class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                     <button class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Upload</button>
                 </div>
