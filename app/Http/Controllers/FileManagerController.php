@@ -41,7 +41,7 @@ class FileManagerController extends Controller
 
     protected function uploadImage($file)
     {
-        $uploadFolder = 'contact-us';
+        $uploadFolder = 'gallery';
         $image = $file;
         $image_uploaded_path = $image->store($uploadFolder, 'public');
         $uploadedImageUrl = Storage::disk('public')->url($image_uploaded_path);
