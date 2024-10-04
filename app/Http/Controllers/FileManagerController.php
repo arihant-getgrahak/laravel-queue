@@ -13,7 +13,7 @@ class FileManagerController extends Controller
     {
         $files = FileManager::all();
         if (count($files) == 0) {
-            return view('welcome')->with("files", null);
+            return view('welcome')->with("files", []);
         }
         return view('welcome')->with("files", $files);
     }
