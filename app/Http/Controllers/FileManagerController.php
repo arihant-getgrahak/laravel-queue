@@ -11,7 +11,8 @@ class FileManagerController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        $files = FileManager::all();
+        return view('welcome')->with("files", $files);
     }
     public function store(Request $request)
     {
