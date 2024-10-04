@@ -34,6 +34,14 @@
             </div>
         </div>
     </div>
+    <script>
+        if ("{{ session('success') }}") {
+            alert("{{ session('success') }}");
+        }
+        if ("{{ session('error') }}") {
+            alert("{{ session('error') }}");
+        }
+    </script>
 </body>
 
 </html>
